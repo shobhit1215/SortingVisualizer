@@ -7,6 +7,7 @@ from bubblesort import bubble_sort
 from selectionsort import selection_sort
 from quicksort import quick_sort
 from mergesort import mergesort
+from insertionsort import insertion_sort
 
 #Tkinter object
 root = Tk()
@@ -69,6 +70,10 @@ def startAlgorithm():
        
     if alg == 'Merge Sort':
         mergesort(data,drawData,speedScale.get())
+
+    if alg == 'Insertion Sort':
+        insertion_sort(data,drawData,speedScale.get())
+
     drawData(data,['green' for x in range(len(data))])
 
 
@@ -81,7 +86,7 @@ canvas = Canvas(root,width=950,height=500,bg='white')
 canvas.grid(row=1,column=0,padx=10,pady=5)
 
 Label(UI_Frame,text="Algorithm: " , bg="grey").grid(row=0,column=0,padx=5,pady=5,sticky=W)
-algMenu = ttk.Combobox(UI_Frame,textvariable=select_alg,values=['Bubble Sort','Selection Sort','Quick Sort','Merge Sort'])
+algMenu = ttk.Combobox(UI_Frame,textvariable=select_alg,values=['Bubble Sort','Selection Sort','Quick Sort','Merge Sort','Insertion Sort'])
 algMenu.grid(row=0,column=1,padx=5,pady=5)
 
 
