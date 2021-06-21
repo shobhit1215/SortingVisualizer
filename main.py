@@ -1,16 +1,23 @@
+
+#Packages
 from tkinter import *
 from tkinter import ttk
 import random
 from bubblesort import bubble_sort
 
+#Tkinter object
 root = Tk()
 root.title('Sorting Algorithms Visualization')
-root.geometry("900x700")
+root.geometry('1000x700+200+50')
 root.config(bg='black')
+root.resizable(False,False)
 
+#variables
 select_alg = StringVar()
 data = []
 
+#Functions
+#To draw the array
 def drawData(data,colorArray):
     canvas.delete("all")
     c_height = 500
@@ -33,7 +40,7 @@ def drawData(data,colorArray):
     root.update_idletasks()
 
 
-
+#Generate random array in every call
 def generate():
     global data
   
@@ -45,14 +52,17 @@ def generate():
         data.append(random.randrange(minValue,maxValue+1))
     drawData(data,['red' for x in range(len(data))])
 
+#Calls the particular algorithm
 def startAlgorithm():
     global data
     bubble_sort(data,drawData,speedScale.get())
 
-UI_Frame = Frame(root,width=900,height=200,bg='grey')
+#GUI application
+
+UI_Frame = Frame(root,width=950,height=200,bg='grey')
 UI_Frame.grid(row=0,column=0,padx=10,pady=5)
 
-canvas = Canvas(root,width=900,height=500,bg='white')
+canvas = Canvas(root,width=950,height=500,bg='white')
 canvas.grid(row=1,column=0,padx=10,pady=5)
 
 Label(UI_Frame,text="Algorithm: " , bg="grey").grid(row=0,column=0,padx=5,pady=5,sticky=W)
@@ -64,7 +74,7 @@ speedScale = Scale(UI_Frame, from_=0.1 ,to=2.0,length = 200,digits=2,resolution=
 speedScale.grid(row=0,column=2,padx=5,pady=5)
 
 
-Button(UI_Frame,text="Start",command=startAlgorithm,bg='red').grid(row=0,column=3,padx=5,pady=5)
+Button(UI_Frame,text="Start",command=startAlgorithm,bg='red',relief=GROOVE).grid(row=0,column=3,padx=5,pady=5)
 
 
 
@@ -80,7 +90,7 @@ maxEntry = Scale(UI_Frame,from_=100,to=1000,resolution=1,orient=HORIZONTAL,label
 maxEntry.grid(row=1,column=2,padx=5,pady=5)
 
 
-Button(UI_Frame,text="Generate",command=generate,bg='white').grid(row=1,column=3,padx=5,pady=5)
+Button(UI_Frame,text="Generate",command=generate,bg='white',relief=GROOVE).grid(row=1,column=3,padx=5,pady=5)
 
 
 root.mainloop()
