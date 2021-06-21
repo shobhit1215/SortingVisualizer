@@ -5,6 +5,7 @@ from tkinter import ttk
 import random
 from bubblesort import bubble_sort
 from selectionsort import selection_sort
+from quicksort import quick_sort
 
 #Tkinter object
 root = Tk()
@@ -56,11 +57,16 @@ def generate():
 #Calls the particular algorithm
 def startAlgorithm():
     global data
+    if not data: return
     alg = algMenu.get()
     if alg=='Selection Sort':
         selection_sort(data,drawData,speedScale.get())
     if alg=='Bubble Sort':
         bubble_sort(data,drawData,speedScale.get())
+    if alg=='Quick Sort':
+        quick_sort(data,0,len(data)-1,drawData,speedScale.get())
+        drawData(data,['green' for x in range(len(data))])
+
 
 #GUI application
 
@@ -71,11 +77,11 @@ canvas = Canvas(root,width=950,height=500,bg='white')
 canvas.grid(row=1,column=0,padx=10,pady=5)
 
 Label(UI_Frame,text="Algorithm: " , bg="grey").grid(row=0,column=0,padx=5,pady=5,sticky=W)
-algMenu = ttk.Combobox(UI_Frame,textvariable=select_alg,values=['Bubble Sort','Selection Sort'])
+algMenu = ttk.Combobox(UI_Frame,textvariable=select_alg,values=['Bubble Sort','Selection Sort','Quick Sort'])
 algMenu.grid(row=0,column=1,padx=5,pady=5)
 
 
-speedScale = Scale(UI_Frame, from_=0.1 ,to=2.0,length = 200,digits=2,resolution=0.2,orient=HORIZONTAL,label="Select Speed[s]")
+speedScale = Scale(UI_Frame, from_=0.1 ,to=5.0,length = 200,digits=2,resolution=0.2,orient=HORIZONTAL,label="Select Speed[s]")
 speedScale.grid(row=0,column=2,padx=5,pady=5)
 
 
